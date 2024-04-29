@@ -6,6 +6,11 @@ export const AppContext = createContext<AppContextType>({
     addRandomImage: () => {},
     addUploadImage: () => {},
     setImages: () => {},
+    currentImages: [],
+    page: 1,
+    setPage: () => {},
+    endIndex: 0,
+    totalPages: 0
 });
 
 type ImageItems = {
@@ -22,6 +27,11 @@ type AppContextType = {
     addRandomImage: () => void;
     addUploadImage: (image: File) => void;
     setImages: React.Dispatch<React.SetStateAction<ImageItems[]>>;
+    currentImages: ImageItems[];
+    page: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    endIndex: number;
+    totalPages: number;
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
@@ -68,12 +78,27 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setImages([...images, newImage]);
     };
 
+    // Pagination
+    const [page, setPage] = useState(1);
+    const imagesPerPage = 12;
+
+    // Calculate the current images to display based on the current page
+    const startIndex = (page - 1) * imagesPerPage;
+    const endIndex = startIndex + imagesPerPage;
+    const currentImages = images.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(images.length / imagesPerPage);
+
     return (
         <AppContext.Provider value={{
             images,
             setImages,
             addRandomImage,
-            addUploadImage
+            addUploadImage,
+            currentImages,
+            page,
+            setPage,
+            endIndex,
+            totalPages
         }}>
             {children}
         </AppContext.Provider>
