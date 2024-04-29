@@ -4,6 +4,7 @@ import { createContext, useState } from "react";
 export const AppContext = createContext<AppContextType>({
     images: [],
     addRandomImage: () => {},
+    addUploadImage: () => {},
     setImages: () => {},
 });
 
@@ -19,12 +20,15 @@ type ImageItems = {
 type AppContextType = {
     images: ImageItems[];
     addRandomImage: () => void;
+    addUploadImage: (image: File) => void;
     setImages: React.Dispatch<React.SetStateAction<ImageItems[]>>;
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+    // State to store the images
     const [images, setImages] = useState<ImageItems[]>([]);
 
+    // Function to add a random image from the Picsum API
     const addRandomImage = async () => {
         try {
         // API request to get information about a random image
@@ -51,11 +55,25 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    // Function to add an uploaded image
+    const addUploadImage = (image: File) => {
+        const newImage: ImageItems = {
+            id: Math.random().toString(36).substr(2, 9), // Generate a unique ID for the uploaded image
+            author: "Uploaded by user",
+            width: 0,
+            height: 0,
+            url: "",
+            download_url: URL.createObjectURL(image), // Generate a URL for the uploaded image
+        };
+        setImages([...images, newImage]);
+    };
+
     return (
         <AppContext.Provider value={{
             images,
             setImages,
-            addRandomImage
+            addRandomImage,
+            addUploadImage
         }}>
             {children}
         </AppContext.Provider>

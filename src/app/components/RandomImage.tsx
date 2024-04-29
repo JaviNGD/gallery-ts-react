@@ -1,6 +1,15 @@
-type Props = { image: string, id: string} 
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
-export const RandomImage = ({ image, id }: Props): JSX.Element => {
+export const RandomImage = (): JSX.Element => {
+    const { addRandomImage } = useContext(AppContext);
 
-    return <img src={image} alt={`Image ${id} from picsum`} className="w-full h-full object-cover rounded-md"/>
+    return (
+        <button 
+            onClick={addRandomImage}
+            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded-full shadow-sm"
+        >
+            Add random image
+        </button>
+    )
 }
