@@ -10,17 +10,12 @@ export const AppContext = createContext<AppContextType>({
     page: 1,
     setPage: () => {},
     endIndex: 0,
-    totalPages: 0
+    totalPages: 0,
+    selectedImage: null,
+    setSelectedImage: () => {},
+    handleImageClick: () => {},
+    handleCloseModal: () => {}
 });
-
-type ImageItems = {
-    id: string;
-    author: string;
-    width: number;
-    height: number;
-    url: string;
-    download_url: string;
-};
 
 type AppContextType = {
     images: ImageItems[];
@@ -32,6 +27,19 @@ type AppContextType = {
     setPage: React.Dispatch<React.SetStateAction<number>>;
     endIndex: number;
     totalPages: number;
+    selectedImage: ImageItems | null;
+    setSelectedImage: React.Dispatch<React.SetStateAction<ImageItems | null>>;
+    handleImageClick: (image: ImageItems) => void;
+    handleCloseModal: () => void;
+};
+
+export type ImageItems = {
+    id: string;
+    author: string;
+    width: number;
+    height: number;
+    url: string;
+    download_url: string;
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
@@ -88,6 +96,17 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const currentImages = images.slice(startIndex, endIndex);
     const totalPages = Math.ceil(images.length / imagesPerPage);
 
+    // Show image details
+    const [selectedImage, setSelectedImage] = useState<ImageItems | null>(null);
+
+    const handleImageClick = (image: ImageItems) => {
+        setSelectedImage(image);
+    };
+    
+    const handleCloseModal = () => {
+        setSelectedImage(null);
+    };
+
     return (
         <AppContext.Provider value={{
             images,
@@ -98,7 +117,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             page,
             setPage,
             endIndex,
-            totalPages
+            totalPages,
+            selectedImage,
+            setSelectedImage,
+            handleImageClick,
+            handleCloseModal
         }}>
             {children}
         </AppContext.Provider>
