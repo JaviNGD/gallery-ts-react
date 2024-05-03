@@ -67,9 +67,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         // Add the new image to the 'images' state
-        setImages([...images, newRandomImage]);
+        setImages([newRandomImage, ...images]);
         } catch (error) {
-        console.error("Error adding random image:", error);
+            console.error("Error adding random image:", error);
         }
     };
 
@@ -83,12 +83,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             url: "",
             download_url: URL.createObjectURL(image), // Generate a URL for the uploaded image
         };
-        setImages([...images, newImage]);
+        setImages([newImage, ...images]);
     };
 
     // Pagination
     const [page, setPage] = useState(1);
-    const imagesPerPage = 12;
+    const imagesPerPage = 24;
 
     // Calculate the current images to display based on the current page
     const startIndex = (page - 1) * imagesPerPage;
