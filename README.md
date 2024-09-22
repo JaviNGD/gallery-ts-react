@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Photo Gallery 📷
 
-## Getting Started
+Photo gallery that allows uploading images or fetching them from an API, built with TypeScript and Next.js.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<img src="https://simpleicons.org/icons/typescript.svg" alt="" width="32" height="32"> **TypeScript**
+
+<img src="https://simpleicons.org/icons/nextdotjs.svg" alt="" width="32" height="32"> **Next.js**
+
+<img src="https://simpleicons.org/icons/tailwindcss.svg" alt="Tailwind CSS" width="32" height="32"> **Tailwind CSS**  
+
+<img src="https://simpleicons.org/icons/git.svg" alt="Git" width="32" height="32"> **Git**  
+
+## Run Locally 
+
+### Clone the project
+```plaintext
+git clone https://github.com/JaviNGD/gallery-ts-react.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Go to the project directory
+```plaintext
+cd gallery-ts-react
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Install dependencies
+```plaintext
+  npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Start the server
+```plaintext
+  npm run dev
+```
 
-## Learn More
+### See page in
+```plaintext
+  http://localhost:3000/
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+📸
